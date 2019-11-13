@@ -16,6 +16,8 @@ export class ListaComponent implements OnInit {
   entidades : Observable<Entidad[]>;
   clientesPendientes = [];
   mostrar : boolean = true;
+  jefeLogueado = {nombre : "Daniel" , apellido : "Holub" , path : "../../../assets/jefe.png" , perfil : "Supervisor"};
+  loading : boolean = true;
   constructor(private comandaServicio : ComandaService ,private alertController : AlertController,private toastController : ToastController,private statusBar : StatusBar) {
   }
 
@@ -43,56 +45,16 @@ export class ListaComponent implements OnInit {
         this.mostrar = true;
       }
     });
+    setTimeout(()=>{
+      this.loading = false;
+    },4000);
     
   }
-  async cambiarEstado(estado : string,obj : Entidad) {
-    let msj = "";
-    let color = "";
-    obj.estado = estado;
-    if(estado == "rechazado"){
-       msj = "Esta segruro de rechazar el ingreso de este cliente al restaurante?";
-       color = "danger"
-    }
-    else if(estado == "aceptado"){
-      msj = "Esta segruro de aceptar el ingreso de este cliente al restaurante?";
-      color = "success";
-    }
-    
-    const alert = await this.alertController.create({
-      header: msj,
-      buttons: [{
-        text: 'Aceptar',
-        cssClass: 'custom-alert-danger',
-        handler: () => {
-          console.log('Confirm acept');
-          this.comandaServicio.actualizarClientes(obj)
-          this.presentToastWithOptions(estado,color);
-        }
-      }, {
-        text: 'Cancelar',
-        handler: () => {
-          console.log('Confirm cancel');
-        }
-      }]
-    });
-
-    await alert.present();
-  }
-  async presentToastWithOptions(estado : string,color : string) {
-    let msj : string = "";
-    if(estado == "aceptado"){
-      msj = "Cliente aceptado :) .Se le ha enviado un correo indicando lo sucedido";
-    }
-    else if(estado == "rechazado"){
-      msj = "Cliente rechazado :( .Se le ha enviado un correo indicando lo sucedido";
-    }
-    const toast = await this.toastController.create({
-      message: msj,
-      duration : 3000,
-      color : color
-    });
-    toast.present();
-  }
+   cambiarEstado(estado : string,obj : Entidad) {
+     this.comandaServicio.cambiarEstado(estado,obj);
+   }
+  
+  
 
 
 }

@@ -1,4 +1,8 @@
-<ion-content class = "ion-padding ion-text-center">
+<ion-content *ngIf = "loading" class = "ion-padding ion-text-center" >
+  <img src = "../../../assets/icon.png" style="margin-top:60%;position: absolute;left: 36%;" width="90" height="90">
+  <ion-spinner name="crescent" color = "danger" style="margin-top:60%;">La comanda</ion-spinner>
+</ion-content>
+<ion-content class = "ion-padding ion-text-center"  *ngIf = "!loading">
   <ion-list style="margin-top:15%" *ngIf = "mostrar; else miDiv">
   <ion-item  *ngFor = "let item of clientesPendientes" >
       <ion-avatar slot="start">

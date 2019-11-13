@@ -9,12 +9,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
-import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { MenuJefeComponent } from './componentes/menu-jefe/menu-jefe.component'
 import { ListaComponent } from './componentes/lista/lista.component';
 import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
+import { ComandaService } from './servicios/comanda.service';
+import { HttpClientModule } from '@angular/common/http';
+import {AngularFireMessagingModule} from '@angular/fire/messaging'
+
 const firebaseConfig = {
   apiKey: "AIzaSyC-UMfVeQNeMx1AQ2m9Mgktwf5w5o9YZAE",
   authDomain: "lacomanda-c1055.firebaseapp.com",
@@ -25,6 +28,7 @@ const firebaseConfig = {
   appId: "1:503253383760:web:755ebaceea1ba83ce2af55",
   measurementId: "G-FF8H5K31XZ"
 }
+
 @NgModule({
   declarations: [AppComponent,MenuJefeComponent,ListaComponent, NombreApellidoPipe],
   entryComponents: [],
@@ -32,14 +36,16 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     RouterModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpClientModule,
+    AngularFireMessagingModule
 
   ],
   providers: [
     StatusBar,
     SplashScreen,
-  
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ComandaService,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
   ],
   bootstrap: [AppComponent]
 })
