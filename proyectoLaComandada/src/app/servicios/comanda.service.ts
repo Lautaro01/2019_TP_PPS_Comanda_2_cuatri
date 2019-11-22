@@ -12,8 +12,10 @@ import { AlertController, ToastController } from '@ionic/angular';
 export class ComandaService {
 
   entidadRef : AngularFirestoreCollection<Entidad>
+  pedidoRef : AngularFirestoreCollection<any>;
   constructor(private bd : AngularFirestore , private auth : AngularFireAuth,private http: HttpClient, private msj : AngularFireMessaging,private alertController : AlertController,private toastController : ToastController) {
     this.entidadRef = this.bd.collection("entidades");
+    this.pedidoRef = this.bd.collection("pedidos", ref => ref.where('estadoPedido', '==' ,'pendiente'));
    }
 
    traerEntidades(){
@@ -77,5 +79,10 @@ export class ComandaService {
       this.auth.auth.sendPasswordResetEmail(emailRemitente);
     },3000);
    }
+   actualizarPedido(obj : any){
+     console.log(obj)
+     this.pedidoRef.doc(obj.id).update(obj);
+   }
+
    
 }

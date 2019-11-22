@@ -13,6 +13,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { MenuJefeComponent } from './componentes/menu-jefe/menu-jefe.component'
 import { ListaComponent } from './componentes/lista/lista.component';
+import {MenuMozoComponent } from './componentes/menu-mozo/menu-mozo.component';
+import {PedidosComponent } from './componentes/pedidos/pedidos.component'
 import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
 import { ComandaService } from './servicios/comanda.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,7 +32,7 @@ const firebaseConfig = {
 }
 
 @NgModule({
-  declarations: [AppComponent,MenuJefeComponent,ListaComponent, NombreApellidoPipe],
+  declarations: [AppComponent,MenuJefeComponent,ListaComponent, NombreApellidoPipe,MenuMozoComponent,PedidosComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),

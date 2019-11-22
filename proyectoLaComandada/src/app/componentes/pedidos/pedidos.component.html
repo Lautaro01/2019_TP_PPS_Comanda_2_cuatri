@@ -1,0 +1,32 @@
+<ion-content class = "ion-padding ion-text-center"  *ngIf = "!loading">
+  <ion-card style="margin-top:15%" *ngFor = "let item of pedidos">
+      <ion-card-header color = "danger">
+          <h3>Pedido para la mesa N° {{item.mesa}}</h3>
+      </ion-card-header>
+      
+    <ion-item *ngFor = "let producto of item.productos">
+      <ion-avatar slot="start">
+          <img [src]="producto.imagen">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{producto.nombre}} x {{producto.cantidad}}</h2>
+          <h3>Total : ${{producto.total}} </h3>
+          <p>Tiempo de espera : {{producto.tiempo}} min</p>
+          <ion-button *ngIf = "producto.tipo == 'bebida'"(click) = "derivar(producto,item)"><ion-spinner *ngIf = "producto.derivar && producto.estado == 'pendiente'" name="circles"></ion-spinner><ion-icon *ngIf = "producto.estado == 'listo'" name="checkmark"></ion-icon> {{msjB}}</ion-button>
+          <ion-button *ngIf = "producto.tipo == 'comida'"(click) = "derivar(producto,item)"><ion-spinner *ngIf = "producto.derivar && producto.estado == 'pendiente'" name="circles"></ion-spinner><ion-icon *ngIf = "producto.estado == 'listo'" name="checkmark"></ion-icon> {{msjC}}</ion-button>
+          
+        </ion-label>
+      </ion-item>
+      <h1>TOTAL : ${{item.total}}</h1>
+      <ion-button color = "success" fill = "outline" size = "large" *ngIf = "item.estadoPedido == 'listo'" (click) = "pedidoListo(item)">Pedido listo</ion-button>
+      <ion-button color = "danger" fill = "outline" size = "large" *ngIf = "item.estadoPedido == 'pendiente'">Cancelar pedido</ion-button>
+     
+</ion-card>
+<ng-template #miDiv>
+  <ion-content class = "ion-padding ion-text-center">
+      <img src = "../../../assets/vacio.jpg" style="width: 50%;margin: auto;margin-top: 50%">
+      <br>
+      <ion-label class="formato">No hay clientes pendientes en este momento.</ion-label>
+  </ion-content>
+</ng-template>
+</ion-content>
