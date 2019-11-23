@@ -1,0 +1,31 @@
+<ion-content class="ion-padding ion-text-center" *ngIf="!loading">
+    <ion-card style="margin-top:15%" *ngFor="let item of pedidos">
+        <div *ngIf='item.estadoChef == "pendiente" '>
+            <ion-card-header color="danger">
+                <h3>Pedido para la mesa N° {{item.mesa}}</h3>
+            </ion-card-header>
+
+            <ion-item *ngFor="let producto of item.productos">
+                <div *ngIf='producto.tipo === "comida" && producto.estado === "pendiente" && producto.derivar == true'>
+                    <ion-avatar slot="start">
+                        <img [src]="producto.imagen">
+                    </ion-avatar>
+                    <ion-label>
+                        <h2>{{producto.nombre}} x {{producto.cantidad}}</h2>
+                        <!-- <h3>Total : ${{producto.total}} </h3> -->
+                        <p>Tiempo de espera : {{producto.tiempo}} min</p>
+                    </ion-label>
+                </div>
+            </ion-item>
+            <ion-button color="success" fill="outline" size="large" (click)="pedidoListo(item)">Pedido listo</ion-button>
+        </div>
+    </ion-card>
+    <ng-template #miDiv>
+        <ion-content class="ion-padding ion-text-center">
+            <img src="../../../assets/chef.jpg" style="width: 50%;margin: auto;margin-top: 50%">
+            <br>
+            <ion-label class="formato">No hay pedidos pendientes en este momento.</ion-label>
+        </ion-content>
+    </ng-template>
+
+</ion-content>

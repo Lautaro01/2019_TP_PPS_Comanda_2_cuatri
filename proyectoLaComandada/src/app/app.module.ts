@@ -14,16 +14,24 @@ import { AngularFireModule } from '@angular/fire';
 import { config } from './firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
 
+
 import { MenuMetreComponent } from './componentes/menu-metre/menu-metre.component';
 import { ListaMetreComponent } from './componentes/lista-metre/lista-metre.component';
 import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
+import { MenuChefComponent } from './componentes/menu-chef/menu-chef.component';
+import { PedidosChefComponent } from './componentes/pedidos-chef/pedidos-chef.component';
+import { MenuBarmanComponent } from './componentes/menu-barman/menu-barman.component';
+import { PedidosBarmanComponent } from './componentes/pedidos-barman/pedidos-barman.component';
+import { RutasComponent } from './componentes/rutas/rutas.component';
+
 
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, MenuMetreComponent, ListaMetreComponent, NombreApellidoPipe],
+  declarations: [AppComponent, PedidosChefComponent, MenuMetreComponent, ListaMetreComponent,
+                 NombreApellidoPipe, MenuChefComponent, MenuBarmanComponent, PedidosBarmanComponent, RutasComponent],
   entryComponents: [],
   imports: [BrowserModule, AngularFireModule.initializeApp(config), FormsModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
