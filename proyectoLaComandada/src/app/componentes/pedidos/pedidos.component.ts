@@ -31,13 +31,7 @@ export class PedidosComponent implements OnInit {
       data.forEach(element =>{
         let contador = 0
         element.productos.forEach(prod =>{
-           if(prod.estado == "listo" && prod.derivar == true){
-            if(prod.tipo == "comida"){
-              this.msjC = "Comida lista";
-            }
-            else if(prod.tipo == "bebida"){
-              this.msjB = "Bebida lista";
-            }
+           if(prod.estado == "listo"){
              contador ++ ;
            }
         })
@@ -48,19 +42,22 @@ export class PedidosComponent implements OnInit {
       this.pedidos = data;
     })
   }
-  derivar(producto : any , item : any){
-    console.log(producto);
-    if(producto.tipo == "comida"){
-      this.msjC = "Comida en proceso";
-    }
-    else if(producto.tipo == "bebida"){
-      this.msjB = "Bebida en proceso";
-    }
-    producto.derivar = true;
+  derivar(item : any){
+    console.log(item);
+    item.productos.forEach(producto=>{
+      if(producto.tipo == "comida"){
+        producto.estado = "enviado";
+        item.estadoChef = "pendiente";
+      }
+      else if(producto.tipo == "bebida"){
+        producto.estado = "enviado";
+        item.estadoBarman = "pendiente";
+      }
+    })
+    
     this.comandaService.actualizarPedido(item);
   }
   pedidoListo(item : any){
-    item['estadoPedido'] = 'listo';
     this.comandaService.actualizarPedido(item);
   }
 

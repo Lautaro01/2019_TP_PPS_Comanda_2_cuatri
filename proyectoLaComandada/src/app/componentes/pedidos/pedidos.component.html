@@ -10,16 +10,37 @@
         </ion-avatar>
         <ion-label>
           <h2>{{producto.nombre}} x {{producto.cantidad}}</h2>
-          <h3>Total : ${{producto.total}} </h3>
           <p>Tiempo de espera : {{producto.tiempo}} min</p>
-          <ion-button *ngIf = "producto.tipo == 'bebida'"(click) = "derivar(producto,item)"><ion-spinner *ngIf = "producto.derivar && producto.estado == 'pendiente'" name="circles"></ion-spinner><ion-icon *ngIf = "producto.estado == 'listo'" name="checkmark"></ion-icon> {{msjB}}</ion-button>
-          <ion-button *ngIf = "producto.tipo == 'comida'"(click) = "derivar(producto,item)"><ion-spinner *ngIf = "producto.derivar && producto.estado == 'pendiente'" name="circles"></ion-spinner><ion-icon *ngIf = "producto.estado == 'listo'" name="checkmark"></ion-icon> {{msjC}}</ion-button>
-          
-        </ion-label>
+          <ion-item lines = 'none' style="left:-7%;" *ngIf = "producto.estado == 'enProceso' && producto.tipo == 'comida'">
+            <ion-label color = "danger">Comida en proceso</ion-label>
+            <ion-spinner name = "dots" color = "danger" style = "left:70%;position: absolute;"></ion-spinner>
+          </ion-item>
+          <ion-item lines = 'none' style="left:-7%;" *ngIf = "producto.estado == 'enProceso' && producto.tipo == 'bebida'">
+            <ion-label color = "danger">Bebida en proceso</ion-label>
+            <ion-spinner name = "dots" color = "danger" style = "left:70%;position: absolute;"></ion-spinner>
+          </ion-item>
+          <ion-item lines = 'none' style="left:-7%;" *ngIf = "producto.estado == 'enviado' && producto.tipo == 'comida'">
+            <ion-label color = "danger">Derivado al chef</ion-label>
+            <ion-icon color = "danger" style = "left:60%;position: absolute;" name="exit"></ion-icon>
+          </ion-item>
+          <ion-item lines = 'none' style="left:-7%;" *ngIf = "producto.estado == 'enviado' && producto.tipo == 'bebida'">
+            <ion-label color = "danger">Derivado al barman</ion-label>
+            <ion-icon color = "danger" style = "left:70%;position: absolute;" name="exit"></ion-icon>
+          </ion-item>
+          <ion-item lines = 'none' style="left:-7%;"  *ngIf = "producto.estado == 'listo' && producto.tipo == 'comida'">
+            <ion-label color = "danger">Comida lista</ion-label>
+            <ion-icon color = "danger" style = "left:45%;position: absolute;" name="checkmark-circle"></ion-icon>
+          </ion-item>
+          <ion-item lines = 'none' style="left:-7%;" *ngIf = "producto.estado == 'listo' && producto.tipo == 'bebida'">
+            <ion-label color = "danger">Bebida lista</ion-label>
+            <ion-icon color = "danger" style = "left:42%;position: absolute;" name="checkmark-circle"></ion-icon>
+          </ion-item>
+       </ion-label>
       </ion-item>
-      <h1>TOTAL : ${{item.total}}</h1>
-      <ion-button color = "success" fill = "outline" size = "large" *ngIf = "item.estadoPedido == 'listo'" (click) = "pedidoListo(item)">Pedido listo</ion-button>
-      <ion-button color = "danger" fill = "outline" size = "large" *ngIf = "item.estadoPedido == 'pendiente'">Cancelar pedido</ion-button>
+      <ion-button color = "success" fill = "outline" size = "large"  (click) = "derivar(item)" *ngIf = "item.estadoPedido == 'pendiente' && item.estadoChef == 'nulo' || item.estadoBarman == 'nulo'">Derivar productos</ion-button>
+      <ion-button color = 'success' fill = 'outline' size = 'large' (click) = 'pedidoListo(item)' *ngIf = "item.estadoPedido == 'listo'">Pedido listo <ion-icon name="checkmark-circle"></ion-icon>
+
+      </ion-button>
      
 </ion-card>
 <ng-template #miDiv>
