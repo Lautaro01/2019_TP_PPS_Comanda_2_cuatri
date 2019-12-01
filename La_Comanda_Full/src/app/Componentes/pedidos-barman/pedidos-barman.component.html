@@ -1,0 +1,39 @@
+<ion-content *ngIf="loading" class="ion-padding ion-text-center">
+    <img src="../../../assets/icon.png" style="margin-top:60%;position: absolute;left: 36%;" width="90" height="90">
+    <ion-spinner name="crescent" color="danger" style="margin-top:60%;">La comanda</ion-spinner>
+</ion-content>
+<ion-content class="ion-padding ion-text-center" *ngIf="!loading">
+    <div *ngIf="mostrar; else miDiv">
+        <ion-card style="margin-top:15%" *ngFor="let item of pedidos">
+            <div *ngIf='item.estadoBarman == "pendiente" || item.estadoBarman == "enProceso"'>
+                <ion-card-header color="danger">
+                    <h3>Pedido para la mesa N° {{item.mesa}}</h3>
+                </ion-card-header>
+
+                <ion-row *ngFor="let producto of item.productos">
+                    <ion-item *ngIf='producto.tipo === "bebida" && (producto.estado === "enviado" || producto.estado === "enProceso" ) '>
+                        <div>
+                            <ion-avatar slot="start">
+                                <img [src]="producto.imagen">
+                            </ion-avatar>
+                            <ion-label>
+                                <h2 style="color:black">{{producto.nombre}} x {{producto.cantidad}}</h2>
+                                <!-- <h3>Total : ${{producto.total}} </h3> -->
+                                <p>Tiempo de espera : {{producto.tiempo}} min</p>
+                            </ion-label>
+                        </div>
+                    </ion-item>
+                </ion-row>
+                <ion-button color="success" fill="outline" size="large" (click)="pedidoListo(item)">{{item.estadoBarman | estadoPedido}}</ion-button>
+            </div>
+        </ion-card>
+    </div>
+    <ng-template #miDiv>
+        <ion-content class="ion-padding ion-text-center">
+            <img src="../../../assets/chef.jpg" style="width: 50%;margin: auto;margin-top: 50%">
+            <br>
+            <ion-label class="formato">No hay pedidos pendientes en este momento.</ion-label>
+        </ion-content>
+    </ng-template>
+
+</ion-content>

@@ -1,0 +1,48 @@
+<ion-content class = "ion-padding ion-text-center">
+
+  <div style="margin-top:15%" *ngIf="cuenta == 'pedir'">
+    <img src="../../../assets/usos/mozoCuenta.png" alt="">
+    <h3>Pida la cuenta y en instantes nuestro mozo se la entregara</h3><br>
+    <ion-button expand="full" color="danger" (click)="pedirCuenta()">Pedir la cuenta</ion-button>
+  </div>
+
+  <div  style="margin-top:15%" *ngIf="cuenta == 'pagar'">
+    <ion-card>
+        <ion-card-header style="background-color: red;">
+          <ion-card-title style="color: aliceblue;">Detalles de la cuenta</ion-card-title>
+          <ion-card-subtitle style="color: aliceblue;">Pedidos realizados</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <div *ngFor="let produ of nuevoPedido.productos">
+                <h2 style="color: black;">{{produ.nombre}}</h2>
+                cantidad :{{produ.cantidad}}
+                <br>
+                sub total: {{produ.total}}
+                <br>
+                <hr>
+              </div>
+              <br>
+              <ion-card-subtitle  style=" color: rgb(56, 56, 56);" >Tipo de propina: {{propinahtml}}</ion-card-subtitle>
+              <ion-card-title  style="background-color: red; color: aliceblue;">Total: {{nuevoPedido.total}}</ion-card-title>
+        </ion-card-content>
+    </ion-card>
+    <br>
+    <br>
+    <ion-button expand="block" color="danger" (click)="propina()">Dejar Propina</ion-button>
+    <br>
+    <ion-button expand="block" color="danger" (click)="pagar()">Pagar</ion-button>
+  </div>
+
+  <div style="margin-top:15%" *ngIf="cuenta == 'confirmar'">
+      <img src="../../../assets/usos/mozoCuenta.png" alt="">
+      <img src="../../../assets/usos/loading.gif" alt="">
+      <h3>En breve llegara el mozo a realizar y confirmar el pago, por favor espere</h3><br>
+      <!-- <ion-button expand="full" color="danger" (click)="pedirCuenta()">Pedir la cuenta</ion-button> -->
+  </div>
+
+  <div style="margin-top:15%" *ngIf="cuenta == 'chau'">
+    <img src="../../../assets/logos/logo-comandada.png" alt="">
+    <h1>Gracias por comer con nosotros</h1>
+    <h3>Atte: La Comanda</h3>
+  </div>
+</ion-content>

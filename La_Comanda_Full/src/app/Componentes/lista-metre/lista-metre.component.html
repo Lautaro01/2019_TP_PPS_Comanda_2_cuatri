@@ -1,0 +1,93 @@
+<!-- <ion-header>
+    <ion-toolbar color="danger" hideBackButton="true">
+        <ion-buttons>
+            <ion-menu-button menu="first"></ion-menu-button>
+            <ion-title class="titulo-menu">La Comanda</ion-title>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="loading" class="ion-padding ion-text-center">
+    <img src="../../../assets/icon.png" style="margin-top:60%;position: absolute;left: 36%;" width="90" height="90">
+    <ion-spinner name="crescent" color="danger" style="margin-top:60%;">La comanda</ion-spinner>
+</ion-content>
+<ion-content class="ion-padding ion-text-center" *ngIf="!loading">
+    <ion-list style="margin-top:15%" *ngIf="mostrar; else miDiv">
+        <ion-item *ngFor="let soli of solicitudes">
+            <ion-avatar slot="start">
+                <img [src]="soli.foto">
+            </ion-avatar>
+            <ion-label>
+                <h2>{{soli.nombre | nombreApellido}} {{soli.apellido | nombreApellido}}</h2>
+                <h3>{{soli.correo}}</h3>
+                <p>Se encuentra en espera</p>
+                Seleccione mesa:
+                <select name="select" id="select" [(ngModel)]='selectMesa' (change)="ngCapturar( soli  )">
+                    <div *ngIf="mesas.length != 0">
+                    <option *ngFor="let mesa of mesas" (click)='ngOption(mesa)' [value]='mesa.numero'>{{mesa.numero}}</option> 
+                </div>
+                  </select>
+                <ion-buttons>
+                    <ion-button style="border-radius : 100%;background-color: #10dc60;" (click)="asignarMesa(soli, 'asignado')">
+                        <ion-icon name="checkmark" color="light"></ion-icon>
+                    </ion-button>
+                    <ion-label style="color:white">---</ion-label>
+                    <ion-button style="border-radius : 100%;background-color: #f04141;" (click)="asignarMesa(soli, 'rechazado')">
+                        <ion-icon name="close" color="light"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+    <ng-template #miDiv>
+        <ion-content class="ion-padding ion-text-center">
+            <img src="../../../assets/vacio.jpg" style="width: 50%;margin: auto;margin-top: 50%">
+            <br>
+            <ion-label class="formato">No hay clientes pendientes en este momento.</ion-label>
+        </ion-content>
+    </ng-template>
+</ion-content> -->
+
+<ion-header>
+    <ion-toolbar color="danger" hideBackButton="true">
+        <ion-buttons>
+            <ion-menu-button menu="first"></ion-menu-button>
+            <ion-title class="titulo-menu">Solicitudes Mesas</ion-title>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="loading" class="ion-padding ion-text-center">
+    <img src="../../../assets/icon.png" style="margin-top:60%;position: absolute;left: 36%;" width="90" height="90">
+    <ion-spinner name="crescent" color="danger" style="margin-top:60%;">La comanda</ion-spinner>
+</ion-content>
+<ion-content class="ion-padding ion-text-center" *ngIf="!loading">
+    <ion-list style="margin-top:15%" *ngIf="mostrar; else miDiv">
+        <ion-item *ngFor="let ent of entidades">
+            <ion-avatar slot="start">
+                <img [src]="ent.foto">
+            </ion-avatar>
+            <ion-label>
+                <h2 style="color: black;">{{ent.nombre | nombreApellido}} {{ent.apellido | nombreApellido}}</h2>
+                <h3 style="color: black;">{{ent.correo}}</h3>
+                <p>Se encuentra en espera</p>
+                <ion-buttons>
+                    <ion-button style="border-radius : 100%;background-color: #10dc60;" (click)="asignarMesa(ent, 'asignado')">
+                        <ion-icon name="checkmark" color="light"></ion-icon>
+                    </ion-button>
+                    <ion-label style="color:white">---</ion-label>
+                    <ion-button style="border-radius : 100%;background-color: #f04141;" (click)="asignarMesa(ent, 'rechazado')">
+                        <ion-icon name="close" color="light"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+    <ng-template #miDiv>
+        <ion-content class="ion-padding ion-text-center">
+            <img src="../../../assets/vacio.jpg" style="width: 50%;margin: auto;margin-top: 50%">
+            <br>
+            <ion-label class="formato">No hay clientes pendientes en este momento.</ion-label>
+        </ion-content>
+    </ng-template>
+</ion-content>

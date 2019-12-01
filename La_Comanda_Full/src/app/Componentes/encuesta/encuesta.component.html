@@ -1,0 +1,123 @@
+<ion-content class="text-center">
+  <div *ngIf="encuesta">
+ <ion-list>
+      <ion-list-header>
+          <ion-label style="color:red">¿Qué le parecio la atención de nuestros empleados?</ion-label>
+       </ion-list-header>
+       <ion-list-header>
+          <ion-label style="color:red">Indique nivel de satisfacción</ion-label>
+       </ion-list-header>
+    <ion-item>
+        <ion-range min="-200" max="200" color="danger">
+            <ion-icon color = "danger" size="small" slot="start" name="sad"></ion-icon>
+            <ion-icon color = "danger" slot="end" name="happy"></ion-icon>
+        </ion-range>
+     </ion-item>
+     <table>
+       <tr>
+         <td *ngFor = "let item of fotos"><img [src] = "item" width="120" height="140"></td>
+       </tr>
+     </table>
+     <div>
+       <ion-button (click) = "tomarFoto()" color = "danger"><ion-icon name = "camera"></ion-icon></ion-button>
+     </div>
+     <ion-list-header>
+        <ion-label style="color:red">¿El tiempo de espera del pedido fue lo acordado?</ion-label>
+     </ion-list-header>
+     <ion-item style = "color:black">
+       <ion-label style="color:black">Seleccione una opción</ion-label>
+       <ion-select okText="Aceptar" cancelText="Cancelar">
+         <ion-select-option color = "dark" value="brown">Tardo demasiado</ion-select-option>
+         <ion-select-option value="blonde">Fue lo acordado</ion-select-option>
+         <ion-select-option value="black">Mejor de lo esperado</ion-select-option>
+      </ion-select>
+     </ion-item>
+    <br>
+    <ion-radio-group>
+        <ion-list-header>
+            <ion-label style="color:red">¿Recomendaria el restaurante La Comanda a otras personas?</ion-label>
+          </ion-list-header>
+        <ion-item>
+          <ion-label style = "color:black">SI</ion-label>
+          <ion-radio slot="start" color = "danger"></ion-radio>
+        </ion-item>
+      <ion-item>
+          <ion-label style="color : black;">NO</ion-label>
+          <ion-radio slot="start"  color = "danger"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      <ion-list-header>
+          <ion-label style="color:red">¿Que opinión se merece nuestra App?</ion-label>
+       </ion-list-header>
+       <ion-radio-group>
+          <ion-list-header>
+              <ion-label style="color:red">En cuanto a manejo:</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label style = "color:black">Muy amigable con el cliente</ion-label>
+            <ion-radio slot="start" color = "danger"></ion-radio>
+          </ion-item>
+          <ion-item>
+              <ion-label style = "color:black">Dificil de manejar</ion-label>
+              <ion-radio slot="start" color = "danger"></ion-radio>
+            </ion-item>
+       </ion-radio-group>
+        <ion-radio-group>
+              <ion-list-header>
+                  <ion-label style="color:red">En cuanto a velocidad :</ion-label>
+              </ion-list-header>
+          <ion-item>
+            <ion-label style="color : black;">Su tiempo de respuesta es lento</ion-label>
+            <ion-radio slot="start"  color = "danger"></ion-radio>
+          </ion-item>
+          <ion-item>
+              <ion-label style="color : black;">Su tiempo de respuesta es rápido</ion-label>
+              <ion-radio slot="start"  color = "danger"></ion-radio>
+            </ion-item>
+        </ion-radio-group>
+        <ion-radio-group>
+            <ion-list-header>
+                <ion-label style="color:red">En cuanto a funcionalidades:</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label style="color : black;">Le falta funcionalidades</ion-label>
+              <ion-radio slot="start"  color = "danger"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label style="color : black;">Satisface mis necesidades</ion-label>
+                <ion-radio slot="start"  color = "danger"></ion-radio>
+              </ion-item>
+        </ion-radio-group>
+        <ion-radio-group>
+            <ion-list-header>
+                <ion-label style="color:red">Mas detalles que quiera seleccionar para mejorar la app:</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label style="color : black;">Interfaz mejorable</ion-label>
+              <ion-checkbox slot="start"  color = "danger"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+                <ion-label style="color : black;">Mas animaciones</ion-label>
+                <ion-checkbox slot="start"  color = "danger"></ion-checkbox>
+              </ion-item>
+              <ion-item>
+                  <ion-label style="color : black;">Mas funcionalidades</ion-label>
+                  <ion-checkbox slot="start"  color = "danger"></ion-checkbox>
+              </ion-item>
+        </ion-radio-group>
+        <ion-list-header>
+            <ion-label style="color:red">Realice algún comentario extra (opcional)</ion-label>
+         </ion-list-header>
+        <ion-item>
+            <ion-textarea color = "danger" style="color:black" placeholder = "Escriba aqui"></ion-textarea>
+        </ion-item>
+        <div>
+            <ion-button color = "danger" (click) = "enviarEncuesta()">Enviar encuesta</ion-button>
+        </div>
+        
+  </ion-list>
+</div>
+<div *ngIf="!encuesta" style="margin-top: 20%;">
+    <h1>Gracias por participar de la encuesta</h1>
+</div>
+</ion-content>

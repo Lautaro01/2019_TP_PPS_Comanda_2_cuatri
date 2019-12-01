@@ -1,9 +1,14 @@
+<ion-content *ngIf = "loading" class = "ion-padding ion-text-center" >
+  <img src = "../../../assets/icon.png" style="margin-top:60%;position: absolute;left: 36%;" width="90" height="90">
+  <ion-spinner name="crescent" color = "danger" style="margin-top:60%;"></ion-spinner>
+</ion-content>
 <ion-content class = "ion-padding ion-text-center"  *ngIf = "!loading">
+  <ion-list *ngIf = "mostrar;else miDiv">
   <ion-card style="margin-top:15%" *ngFor = "let item of pedidos">
-      <ion-card-header color = "danger">
+      <ion-card-header color = "danger" (click) = "mostrarP(item)">
           <h3>Pedido para la mesa N° {{item.mesa}}</h3>
       </ion-card-header>
-      
+    <ion-card-content *ngIf = "item.mostrar">
     <ion-item *ngFor = "let producto of item.productos">
       <ion-avatar slot="start">
           <img [src]="producto.imagen">
@@ -13,41 +18,43 @@
           <p>Tiempo de espera : {{producto.tiempo}} min</p>
           <ion-item lines = 'none' style="left:-7%;" *ngIf = "producto.estado == 'enProceso' && producto.tipo == 'comida'">
             <ion-label color = "danger">Comida en proceso</ion-label>
-            <ion-spinner name = "dots" color = "danger" style = "left:70%;position: absolute;"></ion-spinner>
+            <ion-spinner name = "dots" color = "danger" style = "left:85%;position: absolute;"></ion-spinner>
           </ion-item>
           <ion-item lines = 'none' style="left:-7%;" *ngIf = "producto.estado == 'enProceso' && producto.tipo == 'bebida'">
             <ion-label color = "danger">Bebida en proceso</ion-label>
-            <ion-spinner name = "dots" color = "danger" style = "left:70%;position: absolute;"></ion-spinner>
+            <ion-spinner name = "dots" color = "danger" style = "left:80%;position: absolute;"></ion-spinner>
           </ion-item>
-          <ion-item lines = 'none' style="left:-7%;" *ngIf = "producto.estado == 'enviado' && producto.tipo == 'comida'">
+          <ion-item lines = 'none' style="left:-7%;" *ngIf = "producto.estado == 'enviado' && producto.tipo == 'comida'" >
             <ion-label color = "danger">Derivado al chef</ion-label>
-            <ion-icon color = "danger" style = "left:60%;position: absolute;" name="exit"></ion-icon>
+            <ion-icon color = "danger" style = "left:70%;position: absolute;" name="exit"></ion-icon>
           </ion-item>
           <ion-item lines = 'none' style="left:-7%;" *ngIf = "producto.estado == 'enviado' && producto.tipo == 'bebida'">
             <ion-label color = "danger">Derivado al barman</ion-label>
-            <ion-icon color = "danger" style = "left:70%;position: absolute;" name="exit"></ion-icon>
+            <ion-icon color = "danger" style = "left:85%;position: absolute;" name="exit"></ion-icon>
           </ion-item>
           <ion-item lines = 'none' style="left:-7%;"  *ngIf = "producto.estado == 'listo' && producto.tipo == 'comida'">
             <ion-label color = "danger">Comida lista</ion-label>
-            <ion-icon color = "danger" style = "left:45%;position: absolute;" name="checkmark-circle"></ion-icon>
+            <ion-icon color = "danger" style = "left:55%;position: absolute;" name="checkmark-circle"></ion-icon>
           </ion-item>
           <ion-item lines = 'none' style="left:-7%;" *ngIf = "producto.estado == 'listo' && producto.tipo == 'bebida'">
             <ion-label color = "danger">Bebida lista</ion-label>
-            <ion-icon color = "danger" style = "left:42%;position: absolute;" name="checkmark-circle"></ion-icon>
+            <ion-icon color = "danger" style = "left:50%;position: absolute;" name="checkmark-circle"></ion-icon>
           </ion-item>
        </ion-label>
       </ion-item>
-      <ion-button color = "success" fill = "outline" size = "large"  (click) = "derivar(item)" *ngIf = "item.estadoPedido == 'pendiente' && item.estadoChef == 'nulo' || item.estadoBarman == 'nulo'">Derivar productos</ion-button>
+      <ion-button color = "success" fill = "outline" size = "large"  (click) = "derivar(item)" *ngIf = "item.estadoPedido == 'pendiente' && item.estadoChef == 'nulo' && item.estadoBarman == 'nulo'">Derivar productos</ion-button>
       <ion-button color = 'success' fill = 'outline' size = 'large' (click) = 'pedidoListo(item)' *ngIf = "item.estadoPedido == 'listo'">Pedido listo <ion-icon name="checkmark-circle"></ion-icon>
 
       </ion-button>
+    </ion-card-content>
      
 </ion-card>
+</ion-list>
+</ion-content>
 <ng-template #miDiv>
   <ion-content class = "ion-padding ion-text-center">
       <img src = "../../../assets/vacio.jpg" style="width: 50%;margin: auto;margin-top: 50%">
       <br>
-      <ion-label class="formato">No hay clientes pendientes en este momento.</ion-label>
+      <ion-label class="formato">No hay pedidos pendientes en este momento.</ion-label>
   </ion-content>
 </ng-template>
-</ion-content>

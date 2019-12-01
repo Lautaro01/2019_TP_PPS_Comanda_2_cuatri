@@ -1,0 +1,36 @@
+<ion-content class = "ion-padding ion-text-center">
+  <div style="margin-top:15%" *ngIf="verificarPerido == 'si'">
+      <ion-button color="light" style="height: auto; width: 70%;" (click)="verificarPedidoQr()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Codigo_QR.svg/500px-Codigo_QR.svg.png" alt=""></ion-button>
+      <br>
+      <img src="http://www.sistec8.com/modulos/catalogo/images/usuario/images/arrows.gif" alt="" width="25%">
+      <img src="../../../assets/usos/plato.png" alt="" width="25%">
+      <ion-text color="dark">
+          <h5>Pulsa para escanear el QR</h5>
+        </ion-text>
+      <p style="margin-top:20%;">Escanea el Qr de tu mesa para saber el estado de tu pedido</p>
+  </div>
+  <div style="margin-top:15%" *ngIf="verificarPerido == 'no'">
+    <ion-button color="light" style="height: auto; width: 70%;" (click)="confirmarPedidoHTML()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Codigo_QR.svg/500px-Codigo_QR.svg.png" alt=""></ion-button>
+    <br>
+    <img src="http://www.sistec8.com/modulos/catalogo/images/usuario/images/arrows.gif" alt="" width="25%">
+    <img src="../../../assets/usos/pedidoListo.png" alt="" width="25%">
+    <ion-text color="dark">
+        <h5>Pulsa para escanear el QR</h5>
+      </ion-text>
+      <h1>¡Su comida ya esta lista!</h1>
+    <p style="margin-top:20%;"> escanee el codigo QR para verificar la recepcion del pedido
+      y poder acceder a los juegos, la encuesta, y pedir la cuenta</p>
+</div>
+<div style="margin-top:15%" *ngIf="verificarPerido == 'verificado'">
+  <!-- <ion-button color="light" style="height: auto; width: 70%;" (click)="confirmarPedidoHTML()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Codigo_QR.svg/500px-Codigo_QR.svg.png" alt=""></ion-button> -->
+  <br>
+  <!-- <img src="http://www.sistec8.com/modulos/catalogo/images/usuario/images/arrows.gif" alt="" width="25%"> -->
+  <img src="../../../assets/usos/pedidoListo.png" alt="" width="25%">
+  <ion-text color="dark">
+      <!-- <h5>Pulsa para escanear el QR</h5> -->
+    </ion-text>
+    <h1>¡Pedido confirmado!</h1>
+  <p style="margin-top:20%;"> Gracias por confirmar el pedido, ya tiene acceso a los juegos, la encuesta y la opcion para pedir la cuenta.</p>
+  <h3>Buen provecho</h3>
+</div>
+</ion-content>

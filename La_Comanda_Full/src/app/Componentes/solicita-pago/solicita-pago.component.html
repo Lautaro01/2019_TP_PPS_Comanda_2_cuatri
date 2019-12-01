@@ -1,0 +1,36 @@
+<ion-content *ngIf = "loading" class = "ion-padding ion-text-center" >
+  <img src = "../../../assets/icon.png" style="margin-top:60%;position: absolute;left: 36%;" width="90" height="90">
+  <ion-spinner name="crescent" color = "danger" style="margin-top:60%;"></ion-spinner>
+</ion-content>
+<ion-content class = "ion-padding ion-text-center"  *ngIf = "!loading">
+  <ion-list *ngIf = "mostrar;else miDiv">
+  <ion-card style="margin-top:15%" *ngFor = "let item of pedidos">
+      <ion-card-header color = "danger" (click) = "mostrarP(item)">
+          <h3>La mesa N° {{item.mesa}} solicita pago</h3>
+      </ion-card-header>
+    <ion-card-content *ngIf = "item.mostrar">
+    <ion-item *ngFor = "let producto of item.productos">
+      <ion-avatar slot="start">
+          <img [src]="producto.imagen">
+        </ion-avatar>
+        <ion-label style="color:black">
+          <h2>{{producto.nombre}} x {{producto.cantidad}}</h2>
+          <p>${{producto.total}}</p>
+       </ion-label>
+     </ion-item>
+      <br>
+      <h1>Total del pedido: ${{item.total}}</h1>
+      <br>
+      <ion-button color = "success"  size = "large"  (click) = "confirmarPago(item)">Confirmar pago</ion-button>
+    </ion-card-content>
+     
+</ion-card>
+</ion-list>
+</ion-content>
+<ng-template #miDiv>
+  <ion-content class = "ion-padding ion-text-center">
+      <img src = "../../../assets/vacio.jpg" style="width: 50%;margin: auto;margin-top: 50%">
+      <br>
+      <ion-label class="formato">No hay solicitudes de pago en este momento.</ion-label>
+  </ion-content>
+</ng-template>
